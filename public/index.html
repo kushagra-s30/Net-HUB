@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NotHub</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/glass.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <div class="topbar-inner">
+                <button class="brand" id="brand" type="button" aria-label="NotHub, go to Home">
+                    <span class="brand-mark" aria-hidden="true">N</span>
+                    <span class="brand-name">NotHub</span>
+                </button>
+
+                <nav aria-label="Main">
+                    <span class="nav-indicator" aria-hidden="true"></span>
+                    <button data-nav="home">Home</button>
+                    <button data-nav="notes">Notes</button>
+                    <button data-nav="dpp">DPP</button>
+                    <button data-nav="puzzles">Puzzles</button>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section id="view-home">
+                <header class="hero">
+                    <div class="hero-text">
+                        <p id="home-date" class="hero-eyebrow"></p>
+                        <h1 id="home-greeting">Welcome to NotHub</h1>
+                        <p id="home-tagline" class="hero-tagline"></p>
+                    </div>
+                    <button id="home-hero-button" class="hero-button" type="button"></button>
+                </header>
+
+                <div id="home-stats" class="stats-grid"></div>
+
+                <div class="home-block">
+                    <h2>Continue learning</h2>
+                    <div id="home-continue"></div>
+                </div>
+
+                <div class="home-block">
+                    <h2>Progress by subject</h2>
+                    <ul id="home-subjects" class="subject-list"></ul>
+                </div>
+
+                <div class="home-block">
+                    <h2>Jump to</h2>
+                    <div class="quick-links">
+                        <button type="button" class="card" data-goto="notes">
+                            <strong>Notes</strong><span>Read and revise</span>
+                        </button>
+                        <button type="button" class="card" data-goto="dpp">
+                            <strong>DPP</strong><span>Daily practice problems</span>
+                        </button>
+                        <button type="button" class="card" data-goto="puzzles">
+                            <strong>Puzzles</strong><span>Train your brain</span>
+                        </button>
+                    </div>
+                </div>
+                <footer class="site-footer">
+                    <div class="footer-brand">
+                        <span class="brand-mark" aria-hidden="true">N</span>
+                        <div>
+                            <strong>NotHub</strong>
+                            <p>Notes, DPP and puzzles in one place.</p>
+                        </div>
+                    </div>
+
+                    <ul class="footer-links">
+                        <li><a href="mailto:workspace2611306@gmail.com">Contact</a></li>
+                        <li><a href="help.html">Help</a></li>   
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+
+                    <ul class="social-links">
+                        <li>
+                            <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="NotHub on Instagram">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="social-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="NotHub on YouTube">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29_0 0_0_.46-5.25_29_29_0_0_0-.46-5.33z"></path>
+                                    <polygon points="9.75_15.02_15.5_11.75_9.75_8.48_9.75_15.02"></polygon>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="NotHub on LinkedIn">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="footer-copy">© 2026 NotHub. All rights reserved.</p>
+                </footer>
+            </section>
+
+            <section id="view-notes" hidden>
+                <h1>Notes</h1>
+
+                <div id="notes-list-view">
+                    <p>Pick a note to read.</p>
+                    <div id="subject-filter" class="filter-bar"></div>
+                    <ul id="notes-list" class="card-list"></ul>
+                </div>
+
+                <article id="note-detail" hidden>
+                    <button id="note-back" class="back-button" type="button">← Back to notes</button>
+                    <h2 id="note-title"></h2>
+                    <p id="note-subject" class="note-subject"></p>
+                    <div id="note-content" class="note-content"></div>
+                    <button id="note-read" class="read-button" type="button"></button>
+                </article>
+            </section>
+
+            <section id="view-dpp" hidden>
+                <h1>DPP</h1>
+                <p>Here you can view and manage your DPP content.</p>
+            </section>
+
+            <section id="view-puzzles" hidden>
+                <h1>Puzzles</h1>
+                <p>Here you can view and manage your puzzles.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/data.js"></script>
+    <script src="/js/progress.js"></script>
+    <script src="/js/settings.js"></script>
+    <script src="/js/notes.js"></script>
+    <script src="/js/home.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
