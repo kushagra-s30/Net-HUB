@@ -1,0 +1,393 @@
+/* ==========================================================
+   NotHub - Liquid Glass layer
+   Load this AFTER your other CSS files:
+   <link rel="stylesheet" href="css/glass.css">
+   It only changes how things LOOK (surface, blur, borders,
+   highlights). It does not change layout.
+   ========================================================== */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+    --blue: #4f7cff;
+    --purple: #8b5cf6;
+
+    --text: #14172b;
+    --text-soft: #4a4f6b;
+
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-bg-hover: rgba(255, 255, 255, 0.65);
+    --glass-bg-strong: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --glass-edge-top: rgba(255, 255, 255, 0.9);
+    --glass-edge-bottom: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 10px 34px rgba(60, 60, 140, 0.18);
+    --glass-shadow-sm: 0 4px 14px rgba(60, 60, 140, 0.14);
+    --glass-blur: blur(18px) saturate(180%);
+
+    --page-a: #dbe6ff;
+    --page-b: #ece2ff;
+    --blob-blue: rgba(79, 124, 255, 0.55);
+    --blob-purple: rgba(139, 92, 246, 0.5);
+}
+
+/* Dark values: used for System-default dark, or when the app sets data-theme="dark" */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --text: #eef0ff;
+        --text-soft: #aab0d4;
+        --glass-bg: rgba(24, 26, 52, 0.42);
+        --glass-bg-hover: rgba(40, 44, 84, 0.58);
+        --glass-bg-strong: rgba(24, 26, 52, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.16);
+        --glass-edge-top: rgba(255, 255, 255, 0.32);
+        --glass-edge-bottom: rgba(255, 255, 255, 0.04);
+        --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+        --glass-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+        --page-a: #0d1030;
+        --page-b: #1a1040;
+        --blob-blue: rgba(79, 124, 255, 0.4);
+        --blob-purple: rgba(139, 92, 246, 0.4);
+    }
+}
+
+:root[data-theme="dark"] {
+    --text: #eef0ff;
+    --text-soft: #aab0d4;
+    --glass-bg: rgba(24, 26, 52, 0.42);
+    --glass-bg-hover: rgba(40, 44, 84, 0.58);
+    --glass-bg-strong: rgba(24, 26, 52, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --glass-edge-top: rgba(255, 255, 255, 0.32);
+    --glass-edge-bottom: rgba(255, 255, 255, 0.04);
+    --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+    --glass-shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+    --page-a: #0d1030;
+    --page-b: #1a1040;
+    --blob-blue: rgba(79, 124, 255, 0.4);
+    --blob-purple: rgba(139, 92, 246, 0.4);
+}
+
+/* ---------- 2. Page backdrop ----------
+   Glass needs something colorful behind it to blur.
+   These fixed blobs are what you see through the glass. */
+body {
+    color: var(--text);
+    background: linear-gradient(135deg, var(--page-a), var(--page-b));
+    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(40vmax 40vmax at 12% 18%, var(--blob-blue), transparent 70%),
+        radial-gradient(45vmax 45vmax at 88% 28%, var(--blob-purple), transparent 70%),
+        radial-gradient(38vmax 38vmax at 40% 95%, var(--blob-blue), transparent 70%);
+}
+
+/* ---------- 3. Glass surfaces ----------
+   Top bar, cards, panels, drawer, pop-ups.
+   Add your own class names to this list, or just put
+   class="glass" on any element. */
+nav,
+header,
+footer,
+.glass,
+.card,
+.panel,
+.stat,
+.note-card,
+.drawer,
+.modal,
+dialog,
+details {
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+        inset 0 1px 0 var(--glass-edge-top),
+        inset 0 -1px 0 var(--glass-edge-bottom),
+        var(--glass-shadow);
+    border-radius: 20px;
+    color: var(--text);
+}
+
+/* The tab group (Home, Notes, DPP, Puzzles) has no box around it.
+   Only the individual tabs are visible. */
+body nav {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* Top bar: sharp rectangle, no accent line.
+   "body" in front makes these rules win over older top bar styles.
+   If your top bar uses another class name, add it to both lists. */
+body header,
+body .topbar,
+body .top-bar,
+body .navbar,
+body .app-header,
+body .site-header {
+    border-radius: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    box-shadow:
+        inset 0 -1px 0 var(--glass-edge-bottom),
+        var(--glass-shadow);
+}
+
+body header::before,
+body header::after,
+body .topbar::before,
+body .topbar::after,
+body .top-bar::before,
+body .top-bar::after,
+body .navbar::before,
+body .navbar::after,
+body .app-header::before,
+body .app-header::after,
+body .site-header::before,
+body .site-header::after {
+    content: none;
+    display: none;
+}
+
+/* Drawer and pop-ups sit above the page, so they get a denser glass */
+.drawer,
+.modal,
+dialog {
+    background: var(--glass-bg-strong);
+}
+
+dialog::backdrop {
+    background: rgba(20, 23, 43, 0.25);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+}
+
+/* ---------- 4. Buttons ---------- */
+button,
+.btn {
+    font: inherit;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.55em 1.1em;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    box-shadow:
+        inset 0 1px 0 var(--glass-edge-top),
+        inset 0 -1px 0 var(--glass-edge-bottom),
+        var(--glass-shadow-sm);
+    transition:
+        background 0.25s ease,
+        transform 0.2s ease,
+        box-shadow 0.25s ease;
+}
+
+button:hover,
+.btn:hover {
+    background: var(--glass-bg-hover);
+    transform: translateY(-1px);
+}
+
+button:active,
+.btn:active {
+    transform: scale(0.97);
+}
+
+button:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+/* Selected / active tab: tinted glass in blue + purple */
+button[aria-pressed="true"],
+button.active,
+.btn.primary {
+    color: #fff;
+    background: linear-gradient(
+        135deg,
+        rgba(79, 124, 255, 0.7),
+        rgba(139, 92, 246, 0.7)
+    );
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Buttons inside the top bar sit flat, so the bar itself reads as one glass piece */
+nav button {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+nav button:hover {
+    background: var(--glass-bg-hover);
+}
+
+/* Active tab: soft tinted glass with a light border and accent-colored text */
+body nav button[aria-pressed="true"],
+body nav button.active {
+    color: #6366f1;
+    background: linear-gradient(
+        135deg,
+        rgba(79, 124, 255, 0.16),
+        rgba(139, 92, 246, 0.2)
+    );
+    border: 0;
+    border-radius: 16px;
+    box-shadow: none;
+}
+
+/* No boxes around the tabs, the menu button or the logo in the top bar */
+body nav button {
+    border: 0;
+    box-shadow: none;
+}
+
+body header button,
+body .topbar button,
+body .top-bar button,
+body .navbar button,
+body .app-header button,
+body .site-header button {
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+body header button:hover,
+body .topbar button:hover,
+body .top-bar button:hover,
+body .navbar button:hover,
+body .app-header button:hover,
+body .site-header button:hover {
+    background: var(--glass-bg-hover);
+}
+
+body header a,
+body .brand,
+body .logo,
+body .app-logo,
+body .site-logo,
+body .nav-brand {
+    border: 0;
+    box-shadow: none;
+}
+
+/* ---------- 4b. Settings button icon: three stacked rings ----------
+   Works on a button whose aria-label has "menu" or "setting" in it,
+   on common class names, or on any button with class="menu-rings". */
+body header button[aria-label*="menu" i],
+body header button[aria-label*="setting" i],
+body .menu-btn,
+body .menu-toggle,
+body .hamburger,
+body .settings-btn,
+body .settings-button,
+body .menu-rings {
+    display: inline-grid;
+    place-items: center;
+    font-size: 0;
+    color: var(--text);
+}
+
+/* Hide the old icon (three lines, text or svg) */
+body header button[aria-label*="menu" i] > *,
+body header button[aria-label*="setting" i] > *,
+body .menu-btn > *,
+body .menu-toggle > *,
+body .hamburger > *,
+body .settings-btn > *,
+body .settings-button > *,
+body .menu-rings > * {
+    display: none;
+}
+
+body header button[aria-label*="menu" i]::before,
+body header button[aria-label*="setting" i]::before,
+body .menu-btn::before,
+body .menu-toggle::before,
+body .hamburger::before,
+body .settings-btn::before,
+body .settings-button::before,
+body .menu-rings::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: currentColor;
+    -webkit-mask: var(--rings-icon) center / contain no-repeat;
+    mask: var(--rings-icon) center / contain no-repeat;
+}
+
+:root {
+    --rings-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.5'%3E%3Ccircle cx='12' cy='3.6' r='2.25'/%3E%3Ccircle cx='12' cy='12' r='2.25'/%3E%3Ccircle cx='12' cy='20.4' r='2.25'/%3E%3C/svg%3E");
+}
+
+/* ---------- 5. Form fields ---------- */
+input,
+textarea,
+select {
+    font: inherit;
+    color: var(--text);
+    padding: 0.6em 0.9em;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    box-shadow: inset 0 1px 0 var(--glass-edge-top);
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+}
+
+/* ---------- 6. Fallbacks ---------- */
+
+/* Browsers without backdrop-filter: use a solid, readable surface */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    nav, header, footer, .glass, .card, .panel, .stat, .note-card,
+    .drawer, .modal, dialog, details, button, .btn, input, textarea, select {
+        background: var(--glass-bg-strong);
+    }
+}
+
+/* People who ask for less transparency get solid surfaces */
+@media (prefers-reduced-transparency: reduce) {
+    nav, header, footer, .glass, .card, .panel, .stat, .note-card,
+    .drawer, .modal, dialog, details, button, .btn, input, textarea, select {
+        background: var(--glass-bg-strong);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
+/* People who ask for less motion get no movement */
+@media (prefers-reduced-motion: reduce) {
+    button, .btn {
+        transition: none;
+    }
+    button:hover, .btn:hover, button:active, .btn:active {
+        transform: none;
+    }
+}
