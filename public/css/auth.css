@@ -1,0 +1,217 @@
+/* NotHub - auth.css : login button + login/sign-up pop-up */
+
+.auth-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-floating {
+    position: fixed;
+    top: 14px;
+    right: 68px; /* leaves room for the settings gear */
+    z-index: 40;
+}
+
+.auth-hello {
+    font-size: 0.9rem;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.auth-btn,
+.auth-submit {
+    font: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent, #3b6cf0);
+    border: 0;
+    border-radius: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.auth-btn:hover,
+.auth-submit:hover {
+    filter: brightness(1.08);
+}
+
+.auth-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.auth-btn:focus-visible,
+.auth-submit:focus-visible,
+.auth-link:focus-visible,
+.auth-close:focus-visible,
+.auth-form input:focus-visible {
+    outline: 2px solid var(--accent, #3b6cf0);
+    outline-offset: 2px;
+}
+
+/* ---------- pop-up ---------- */
+
+.auth-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.auth-backdrop.is-open {
+    display: flex;
+}
+
+.auth-modal {
+    position: relative;
+    width: min(380px, 100%);
+    padding: 28px 24px 22px;
+    border-radius: 16px;
+    background: #fff;
+    color: #16181d;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .auth-modal {
+    background: #1b1d24;
+    color: #eceef2;
+}
+
+.auth-modal h2 {
+    margin: 0 0 16px;
+    font-size: 1.25rem;
+}
+
+.auth-form {
+    display: grid;
+    gap: 14px;
+}
+
+.auth-form label {
+    display: grid;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+.auth-form [hidden] {
+    display: none;
+}
+
+.auth-form input {
+    font: inherit;
+    padding: 10px 12px;
+    color: inherit;
+    background: transparent;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+}
+
+.auth-error {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #d93025;
+}
+
+html[data-theme="dark"] .auth-error {
+    color: #ff8a80;
+}
+
+.auth-submit {
+    padding: 11px 16px;
+}
+
+.auth-switch {
+    margin: 16px 0 0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.auth-link {
+    font: inherit;
+    font-weight: 600;
+    color: var(--accent, #3b6cf0);
+    background: none;
+    border: 0;
+    padding: 0 0 0 4px;
+    cursor: pointer;
+}
+
+.auth-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 1rem;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* Same accent colours as the settings drawer, used only if style.css has no --accent */
+html[data-accent="blue"] { --accent: #3b6cf0; }
+html[data-accent="purple"] { --accent: #7c3aed; }
+html[data-accent="green"] { --accent: #059669; }
+html[data-accent="orange"] { --accent: #ea580c; }
+
+/* Your own topbar buttons: make sure the hidden attribute always wins over button styles */
+[data-auth-show][hidden] {
+    display: none !important;
+}
+
+/* ---------- Topbar buttons, pushed to the right side ---------- */
+
+.auth-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto; /* pushes this group to the far right of a flex topbar */
+}
+
+/* Log in = outlined, Sign up / Log out = filled */
+.auth-btn-ghost {
+    font: inherit;
+    font-weight: 600;
+    color: inherit;
+    background: transparent;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.auth-btn-ghost:hover {
+    background: rgba(128, 128, 128, 0.15);
+}
+
+@media (max-width: 600px) {
+    .auth-actions .auth-hello {
+        display: none;
+    }
+    .auth-actions .auth-btn,
+    .auth-actions .auth-btn-ghost {
+        padding: 6px 12px;
+    }
+}
+/* Log in / Sign up (or name + Log out) go to the right end of the top bar */
+.topbar-inner .auth-buttons,
+.topbar-inner .auth-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+/* On phones: keep them next to the logo, with the tabs on the next row */
+@media (max-width: 767px) {
+    .topbar-inner nav {
+        order: 3;
+    }
+}

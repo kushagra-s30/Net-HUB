@@ -1012,3 +1012,43 @@ button.settings-toggle:active {
 
 /* Keyboard focus: show it with color instead of a square */
 button.settings-toggle:focus-visible { color: var(--accent); }
+
+
+/* ---------- Log in / Sign up (or name + Log out) on the right of the top bar ---------- */
+.topbar-inner .auth-buttons,
+.topbar-inner .auth-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+/* On phones: logo and buttons on the first row, tabs on the second */
+@media (max-width: 767px) {
+    .topbar-inner nav {
+        order: 3;
+    }
+}
+
+
+/* ---------- Top bar on desktop: logo left, tabs centered, buttons right ---------- */
+@media (min-width: 768px) {
+    .topbar-inner {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+    }
+
+    .topbar-inner .brand {
+        justify-self: start;
+    }
+
+    .topbar-inner nav {
+        justify-self: center;
+    }
+
+    .topbar-inner .auth-buttons,
+    .topbar-inner .auth-user {
+        justify-self: end;
+    }
+}

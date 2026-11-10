@@ -7,7 +7,6 @@
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/glass.css">
-    <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
     <div class="app">
@@ -25,6 +24,16 @@
                     <button data-nav="dpp">DPP</button>
                     <button data-nav="puzzles">Puzzles</button>
                 </nav>
+
+                <div class="auth-buttons" id="auth-buttons">
+                    <button type="button" class="auth-btn auth-login" id="login-btn">Log in</button>
+                    <button type="button" class="auth-btn auth-signup" id="signup-btn">Sign up</button>
+                </div>
+
+                <div class="auth-user" id="auth-user" hidden>
+                    <span class="auth-name" id="auth-name"></span>
+                    <button type="button" class="auth-btn auth-logout" id="logout-btn">Log out</button>
+                </div>
             </div>
         </header>
 
