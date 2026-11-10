@@ -1,0 +1,199 @@
+/* ==========================================================
+   NotHub - pages.css
+   Extra styles for help.html and about.html
+   (loaded after style.css)
+   ========================================================== */
+
+/* ---------- Top bar: real links instead of tab buttons ---------- */
+a.brand {
+    text-decoration: none;
+}
+
+nav a {
+    position: relative;
+    z-index: 1;
+    flex: 1 0 auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 999px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--ink);
+    background: rgba(79, 70, 229, 0.06);
+}
+
+nav a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: -3px;
+}
+
+@media (min-width: 768px) {
+    nav a {
+        flex: 0 0 auto;
+    }
+}
+
+/* Current page in the footer */
+.footer-links a[aria-current="page"] {
+    color: var(--accent);
+}
+
+/* ---------- Page layout ---------- */
+.page-lead {
+    font-size: 1.1rem;
+}
+
+.page-section {
+    margin-top: var(--space-4);
+}
+
+.page-section h2 {
+    margin: 0 0 var(--space-1);
+    font-size: 1.15rem;
+}
+
+/* ---------- Help: FAQ accordion ---------- */
+.faq {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-3);
+    max-width: 48rem;
+}
+
+.faq details {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease;
+}
+
+.faq details:hover,
+.faq details[open] {
+    border-color: var(--accent);
+}
+
+.faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    border-radius: var(--radius);
+}
+
+.faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq summary::after {
+    content: "+";
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--accent);
+    transition: transform 0.2s ease;
+}
+
+.faq details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.faq summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.faq details p {
+    margin: 0;
+    padding: 0 var(--space-2) var(--space-2);
+}
+
+.faq details[open] p {
+    animation: view-in 0.25s ease both;
+}
+
+/* ---------- About: info cards ---------- */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+}
+
+.info-card {
+    padding: var(--space-2);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.info-card-mark {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-bottom: 0.75rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--gradient);
+    border-radius: 10px;
+}
+
+.info-card h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+}
+
+.info-card p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+    .info-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ---------- Gradient button-link ---------- */
+.cta-link {
+    display: inline-block;
+    padding: 0.7rem 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    background: var(--gradient);
+    border-radius: 999px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+}
+
+.cta-link:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    nav a,
+    .faq details,
+    .faq summary::after,
+    .cta-link {
+        transition: none;
+    }
+
+    .faq details[open] p {
+        animation: none;
+    }
+}
