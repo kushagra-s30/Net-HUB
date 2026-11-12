@@ -427,3 +427,34 @@ select:focus-visible {
         transform: none;
     }
 }
+/* Log in / Sign up / Log out: readable in both light and dark themes */
+body .topbar .topbar-inner .auth-btn {
+    font-weight: 600;
+    padding: 0.5em 1.1em;
+    border-radius: 999px;
+    border: 1px solid transparent;
+}
+
+/* Log in and Log out: outlined, text follows the theme */
+body .topbar .topbar-inner .auth-login,
+body .topbar .topbar-inner .auth-logout {
+    color: var(--text);
+    background: transparent;
+    border-color: var(--glass-border);
+}
+
+/* Sign up: filled gradient with white text, same in both themes */
+body .topbar .topbar-inner .auth-signup {
+    color: #fff;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+}
+
+body .topbar .topbar-inner .auth-signup:hover {
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    filter: brightness(1.1);
+}
+
+/* Name shown after login */
+body .topbar .topbar-inner .auth-name {
+    color: var(--text);
+}
