@@ -1052,3 +1052,9 @@ button.settings-toggle:focus-visible { color: var(--accent); }
         justify-self: end;
     }
 }
+
+
+/* ---------- Footer: same space on all four sides inside the glass box ---------- */
+body .site-footer {
+    padding: var(--space-3);
+}
