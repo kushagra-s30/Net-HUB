@@ -200,18 +200,19 @@ html[data-accent="orange"] { --accent: #ea580c; }
         padding: 6px 12px;
     }
 }
-/* Log in / Sign up (or name + Log out) go to the right end of the top bar */
-.topbar-inner .auth-buttons,
-.topbar-inner .auth-user {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-left: auto;
+
+/* ---------- Pop-up extras: tall sign-up form + your topbar ids ---------- */
+
+.auth-modal {
+    max-height: 92vh;
+    overflow-y: auto;
 }
 
-/* On phones: keep them next to the logo, with the tabs on the next row */
-@media (max-width: 767px) {
-    .topbar-inner nav {
-        order: 3;
-    }
+/* The hidden attribute must always win over your own button styles */
+#auth-buttons[hidden],
+#auth-user[hidden],
+#login-btn[hidden],
+#signup-btn[hidden],
+#logout-btn[hidden] {
+    display: none !important;
 }
