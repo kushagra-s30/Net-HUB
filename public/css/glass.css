@@ -458,3 +458,99 @@ body .topbar .topbar-inner .auth-signup:hover {
 body .topbar .topbar-inner .auth-name {
     color: var(--text);
 }
+/* NotHub - class tiles, subject tiles and note rows on the Notes page.
+   Paste at the END of public/css/glass.css.
+   If you pasted an earlier version of this block (.notes-nav, .tile-list,
+   .notes-empty ...), delete it first and paste this one instead. */
+
+.notes-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.notes-nav[hidden] { display: none; }
+.notes-nav .back-button { margin: 0; }
+.notes-crumb { font-weight: 700; color: var(--ink); }
+
+/* Class and subject tiles: one horizontal row, wraps on small screens */
+.card-list.tile-list {
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-2);
+}
+
+.tile-list .tile {
+  justify-content: center;
+  min-height: 7.5rem;
+  padding: var(--space-3);
+  border-radius: 18px;
+}
+.tile-list .tile strong { font-size: 1.35rem; }
+.tile-list .tile span { font-size: 0.9rem; }
+
+.tile-list .tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tile-list .tile { transition: transform 0.2s ease, border-color 0.2s ease; }
+}
+
+.notes-empty {
+  grid-column: 1 / -1;
+  padding: var(--space-3);
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
+
+/* Note list: one full-width row per note (after choosing class + subject).
+   Colours, font, border and glass effect all come from the site's own .card style. */
+.card-list.note-rows {
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+.card-list.note-rows .card {
+  flex-direction: row;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+}
+
+.card-list.note-rows .card strong {
+  font-size: 1.05rem;
+}
+/* NotHub - PDF viewer inside a note.
+   Paste at the END of public/css/glass.css (this is in addition to the notes tiles block). */
+
+.pdf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0 0 var(--space-2);
+}
+.pdf-actions .back-button {
+  display: inline-block;
+  margin: 0;
+  text-decoration: none;
+}
+
+.pdf-frame {
+  display: block;
+  width: 100%;
+  height: 80vh;
+  min-height: 480px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.pdf-message {
+  margin: 0;
+  padding: var(--space-3);
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+}
